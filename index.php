@@ -24,7 +24,7 @@
     <![endif]-->
     
     <div class="container">
-      <h1>Navigo</h1>
+      <h1>Майназаров</h1>
       <nav>
         <a href="javascript:void(0);" data-switchto="about">About</a>
         <a href="javascript:void(0);" data-switchto="services">Services</a>
