@@ -1,0 +1,239 @@
+.brand-wrap {
+  width: 355px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  img {
+    height: auto;
+    width: 255px;
+    margin:0 auto;
+  }
+}
+
+
+.brand-desc {
+  margin-top:17px;
+  color: $c-white;
+  line-height:rem(24);
+}
+
+.brand-slogan {
+  color: $c-white;
+  font-family:$natoHead;
+  margin-top:20px;
+  font-size:rem(32);
+  line-height:rem(36);
+}
+
+.home-call {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: #fff;
+  text-transform: uppercase;
+  font-size:rem(14);
+  color: $c-dark;
+  position: relative;
+  margin:20px auto 0;
+  cursor: pointer;
+  z-index:4;
+  @include transform(scale(0.8));
+
+  span {
+    position: absolute;
+    line-height:1;
+    top: 52%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+}
+
+
+.contacts {
+  position: absolute;
+  bottom:25px;
+  right: 25px;
+  text-align: right;
+  color: #fff;
+  z-index:25;
+  width: 200px;
+  height: 166px;
+  overflow: hidden;
+}
+
+.social-icons {
+  list-style:none;
+  margin: 10px 0 5px;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    margin-right:5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+      height: 19px;
+      width: 19px;
+      display: block;
+
+      svg {
+        fill: #fff;
+      }
+
+      &:hover {
+        svg {
+          fill: $c-prim;
+
+        }
+      }
+
+    }
+  }
+}
+
+.tel {
+  font-size:rem(18);
+  line-height:rem(28);
+
+}
+
+.address {
+  font-size:rem(14);
+}
+
+.email {
+  color: $c-prim;
+  font-size:rem(14);
+  display: block;
+}
+
+.copy {
+  margin-top:5px;
+  font-size:rem(12);
+  text-transform: uppercase;
+}
+
+
+.burger {
+  $width: 28px;
+  $thickness: 2px;
+
+  border: 0;
+  background: none;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  top:25px;
+  right: 25px;
+  z-index:20;
+  color: #fff;
+
+  border-bottom: $thickness solid currentColor;
+  width: $width;
+
+  transition: border-bottom 1s ease-in-out;
+  -webkit-transition: border-bottom 1s ease-in-out;
+
+  // Fix for extra space in Firefox
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    border-bottom: $thickness solid currentColor;
+    width: 100%;
+    margin-bottom: 7px;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    border-bottom: $thickness solid currentColor;
+    width: 100%;
+    margin-bottom: 7px;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+  }
+
+  &.open {
+    border-bottom: $thickness solid transparent;
+    transition: border-bottom 0.8s ease-in-out;
+    -webkit-transition: border-bottom 0.8s ease-in-out;
+
+    &:before {
+      transform: rotate(-405deg) translateY(1px) translateX(-3px);
+      -webkit-transform: rotate(-405deg) translateY(1px) translateX(-3px);
+      transition: transform 0.5s ease-in-out;
+      -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    }
+
+    &:after {
+      transform: rotate(405deg) translateY(-4px) translateX(-5px);
+      -webkit-transform: rotate(405deg) translateY(-4px) translateX(-5px);
+      transition: transform 0.5s ease-in-out;
+      -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    }
+  }
+}
+
+.menu-logo {
+  position: absolute;
+  left: 35px;
+  top: 23px;
+  width: 175px;
+  height: 45px;
+  opacity:0;
+  z-index:5;
+  @include transform(translateY(-100%));
+
+  svg {
+    width: 100%;
+    height:auto;
+    fill: white;
+  }
+}
+
+.call-sm {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background: transparent;
+  text-transform: uppercase;
+  font-size:rem(11);
+  color: $c-white;
+  position: absolute;
+  bottom:200px;
+  right:25px;
+  cursor: pointer;
+  z-index:4;
+  border:1px solid $c-prim;
+  @include transition(background 0.2s cubic-bezier(0.7, 0, 0.3, 1));
+  @include transform(scale(0));
+  z-index:5;
+
+  &:hover {
+    background-color: $c-prim;
+  }
+  span {
+    position: absolute;
+    line-height:1;
+    top: 52%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+}

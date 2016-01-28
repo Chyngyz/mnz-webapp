@@ -1,10 +1,21 @@
-// bower:scss
-// endbower
 
-@import 'bourbon/bourbon';
+// Global Mixins and Vars
+@import "base/vars";
+@import "bourbon/bourbon";
 
+// Fonts
+@import "base/fonts";
 
-h1 {
-	color: blue;
-	font-weight: bold;
-}
+// Animations
+@import "base/animate";
+
+// General CSS
+@import "base/normalize";
+@import "base/base";
+
+// Components
+@import "components/vidBG";
+@import "components/fixed";
+@import "components/audioPlayer";
+@import "components/starsOverlay";
+@import "components/mainnav";

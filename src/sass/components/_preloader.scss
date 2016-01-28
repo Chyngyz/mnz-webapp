@@ -1,0 +1,85 @@
+div.m-app-loading {
+  position: fixed ;
+
+  .animated-container {
+    background-color: #333333 ;
+    bottom: 0px ;
+    left: 0px ;
+    opacity: 1.0 ;
+    position: fixed ;
+    right: 0px ;
+    top: 0px ;
+    z-index: 999999 ;
+
+    &.ng-leave {
+      opacity: 1.0 ;
+      transition: all linear 200ms ;
+      -webkit-transition: all linear 200ms ;
+    }
+
+    &.ng-leave-active {
+      opacity:0;
+    }
+
+  }
+}
+
+
+.vertical-centered-box {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  &:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+  }
+  .content {
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 0;
+  }
+}
+.loader-circle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
+  margin-left: -60px;
+  margin-top: -60px;
+}
+
+.loader-line-mask {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  overflow: hidden;
+  tranform-origin: 60px 60px;
+  -webkit-transform-origin: 60px 60px;
+  -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,0));
+  animation: rotate 1s infinite linear;
+
+  .loader-line {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.5);
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}

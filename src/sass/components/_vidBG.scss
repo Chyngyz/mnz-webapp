@@ -1,0 +1,37 @@
+video.vidBg-body {
+  background-size: cover;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
+}
+
+video.vidBg-fade {
+  opacity: .5;
+}
+
+video.vidBg-fullScreen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-40%);
+}
+
+video.vidBg-autoWidth {
+  width: 100%;
+  height: auto;
+}
+
+.video-pattern {
+  position: absolute;
+  top:0;
+  left:0;
+  background-image: url('../assets/images/video-pattern.png');
+  background-repeat:repeat;
+  height: 100%;
+  width: 100%;
+  z-index:0;
+}
