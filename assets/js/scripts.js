@@ -4,6 +4,9 @@
     var routing = function (mode) {
       router = new Navigo(null, mode === 'hash');
       router.on({
+        'home':function () {
+          homeFn();
+        },
         'services/:service': function (params) {
           setContent(null, params.service);
         },
@@ -11,7 +14,7 @@
           setContent('services');
         },
         'about': function () {
-          setContent('about');
+          aboutFn();
         },
 
         'team': function () {
@@ -22,29 +25,35 @@
         }
       });
       router.on(function() {
-        aboutFn();
+        homeFn();
       });
     };
 
 
     // Content Loader
-    function setContent(id, content) {
+    function setContent(id, content, cb) {
       var slug = id || 'services-' + content;
-      $('.js-content').load('partial/' + slug + '.html', function () {
+      $('.main-content').load('partial/' + slug + '.html', function () {
         console.log('Loaded ' + slug);
+        cb();
       })
     };
 
     // Main navigation
     function navigation () {
+      var currentRoute = window.location.hash || 'home';
+      if(currentRoute != 'home') {
+        currentRoute = currentRoute.slice(1);
+      }
       []
       .slice
-      .call(document.querySelectorAll('nav a'))
+      .call(document.querySelectorAll('.main-nav a'))
       .forEach(function (link) {
         if (link.getAttribute('href').indexOf('http') >= 0) return;
         link.addEventListener('click', function (e) {
           e.preventDefault();
           router.navigate(link.getAttribute('data-switchto'));
+          $(burger).trigger('click');
         });
       });
     };
@@ -109,84 +118,60 @@
 
     var loader = new Loader();
 
-    function menuTrigger () {
-      var menuState = false;
-      $('.burger').click(function () {
-        $(this).toggleClass('open');
-        if(!menuState) {
-          openMenu(true);
-        } else {
-          openMenu(false);
+    var pageStates = {
+      menuState: false,
+      burgerColor: 'light',
+      logoColor: 'light'
+    };
+
+    var burger = $('.burger')[0];
+    $(burger).on('click', function () {
+      var $this = $(this); 
+      $this.toggleClass('open');
+      if(!pageStates.menuState) {
+        if(pageStates.burgerColor == 'dark' || $this.hasClass('dark')) {
+          $this.removeClass('dark').addClass('light');
         }
-        menuState = !menuState;
-      })
-    }
+        openMenu(true);
+      } else {
+        openMenu(false);
+        if(pageStates.burgerColor == 'dark') {
+          $this.removeClass('light').addClass('dark');
+        }
+      }
+      pageStates.menuState = !pageStates.menuState;
+    });
+    
 
     // Audio vars
-    var audioPlayerWrap = $('.audio-wrapper'),
-        audioPlayer = $(audioPlayerWrap).find('.audio-player'),
-        audioTitle = $(audioPlayer).find('.audio-player--title'),
+    var $audioPlayerWrap = $('.audio-wrapper'),
+        $audioPlayer = $audioPlayerWrap.find('.audio-player'),
+        $audioTitle = $audioPlayer.find('.audio-player--title'),
         audio = $('#bgAudio')[0];
 
     // Audio toggle
-    $(audioPlayer).click(function () {
+    $audioPlayer.click(function () {
       if(audio.paused) {
         startAudio();
       } else {
         audio.pause();
-        $(audioPlayer).removeClass('playing');
-        $(audioTitle).html('вык');
+        $audioPlayer.removeClass('playing');
+        $audioTitle.html('вык');
       }
     });
+
     // Start Audio
     function startAudio () {
       audio.volume = 0.5;
       audio.play();
-      $(audioPlayer).addClass('playing');
-      $(audioTitle).html('вкл');
-    };
-
-    function aboutFn() {
-      setTimeout(function () {
-        contactsIn();
-      }, 1000);
-      setContent('about');
-    };
-    
-    var contacts = $('.contacts'),
-        hero = $('.brand-wrap');
-
-    TweenMax.set($(contacts).children(), {
-      x: 200
-    });
-
-    TweenMax.set($(hero).children(), {
-      y: 100,
-      opacity: 0
-    });
-
-    function contactsIn () {
-      setTimeout(function () {
-        TweenMax.staggerTo($(hero).children(), 0.5, {
-          y:0,
-          opacity: 1,
-          ease: Power4.easeIn
-        }, 0.1);
-      }, 300);
-
-      setTimeout(function () {
-        TweenMax.staggerTo($(contacts).children(), 0.3, {
-          x:0,
-          ease: Power1.easeIn
-        }, 0.2);
-      }, 600);      
-    };
+      $audioPlayer.addClass('playing');
+      $audioTitle.html('вкл');
+    };    
 
 
 
 
-    // Fix from starting here
-
+    // Main menu
     var bg = $('.white-overlay')[0],
         bgImg = $('.menu-img')[0],
         skewP = $('.global-overlay')[0],
@@ -194,14 +179,14 @@
         logo = $('.menu-logo')[0],
         callBtn = $('.call-sm')[0],
         nav = $('.main-nav-wrap')[0],
-        ul = $('.main-nav')[0];
-
-    console.log(bgImg);
+        ul = $('.main-nav')[0],
+        menuWrap = $('.menu-wrap')[0];
 
     function openMenu(openMenu) {
       
 
       if(openMenu) {
+        $(menuWrap).css('visibility', 'visible');
         TweenMax.set(nurik, {
           x: '-200'
         });
@@ -289,6 +274,7 @@
             onComplete: function () {
               $(bg).css('visibility', 'hidden');
               $(nurik).css('visibility', 'hidden');
+              $(menuWrap).css('visibility', 'hidden');
               offParal();
             }
         });
@@ -297,6 +283,24 @@
 
     function offParal() {
       document.onmousemove = '';
+    }
+
+    var contacts = $('.contacts');
+    function hideContacts () {
+      TweenMax.set($(contacts).children(), {
+        x: 200
+      });
+    }
+
+    function contactsAnimation () {
+      hideContacts();
+
+      setTimeout(function () {
+        TweenMax.staggerTo($(contacts).children(), 0.3, {
+          x:0,
+          ease: Power1.easeIn
+        }, 0.2);
+      }, 2000);
     }
 
 
@@ -362,6 +366,52 @@
       }
     }
 
+
+    function homeFn () {
+      setContent('home', null, runHome);
+
+      pageStates.burgerColor = 'light';
+
+      function runHome() {
+        contactsAnimation();
+        setTimeout(function () {
+          $(burger).removeClass('dark').addClass('light');
+          contactsIn();
+        }, 1500);
+        var hero = $('.brand-wrap');
+
+        
+
+        TweenMax.set($(hero).children(), {
+          y: 100,
+          opacity: 0
+        });
+
+        function contactsIn () {
+          setTimeout(function () {
+            TweenMax.staggerTo($(hero).children(), 0.5, {
+              y:0,
+              opacity: 1,
+              ease: Power4.easeIn
+            }, 0.1);
+          }, 300);
+        };
+      }
+    }
+
+    function aboutFn () {
+      setContent('about', null, runAbout);
+
+      pageStates.burgerColor = 'dark';
+      hideContacts();
+
+      function runAbout () {
+        setTimeout(function () {
+          $(burger).removeClass('light').addClass('dark');
+        }, 1500);
+      }
+    }
+
     
 
 
@@ -379,11 +429,10 @@
     function init() {
       routing('hash');
       navigation();
-      menuTrigger();
-      startAudio();
+      //startAudio();
       setTimeout(function () {
         loader.hide();
-      }, 0);
+      }, 1500);
     };
 
 

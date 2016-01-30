@@ -136,13 +136,23 @@
   top:25px;
   right: 25px;
   z-index:20;
-  color: #fff;
+  color: transparent;
+  @include transition(color .2s ease-in-out);
+  
 
   border-bottom: $thickness solid currentColor;
   width: $width;
 
   transition: border-bottom 1s ease-in-out;
   -webkit-transition: border-bottom 1s ease-in-out;
+
+  &.light {
+    color: #fff;
+  }
+
+  &.dark {
+    color: #4a4a4a;
+  }
 
   // Fix for extra space in Firefox
   &::-moz-focus-inner {

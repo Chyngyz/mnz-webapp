@@ -40,24 +40,7 @@
     <!-- END: App-Loading Screen. -->
 
     
-    <div class="main-content">
-      <div class="m-video-wrap">
-        <video autoplay poster="assets/images/poster.jpg" id="bgvid" loop>
-          <source src="assets/media/mainazarov.webm" type="video/webm">
-          <source src="assets/media/mainazarov.mp4" type="video/mp4">
-        </video>
-        <div class="video-pattern"></div>
-      </div>
-
-      <div class="brand-wrap text-center" animate-hero>
-        <img class="logo" src="assets/images/logo-lg.svg" alt="">
-        <div class="brand-desc">Профессиональный конферансье, теле-радио ведущий, организатор разного рода мероприятий, резидент лиги Тамашоу и КВН</div>
-        <div class="brand-slogan">Успех Вашего мероприятия в наших руках!</div>
-        <div>
-          <div class="home-call" call-hover ng-click="main.pausePlay = !main.pausePlay"><span>Заказать<br>звонок</span></div>
-        </div>
-      </div>
-    </div>
+    <div class="main-content"></div>
 
     <!-- <nav>
       <a href="javascript:void(0);" data-switchto="about">About</a>
@@ -67,7 +50,7 @@
       <a href="javascript:void(0);" data-switchto="testimonials">Testimonials</a>
     </nav> -->
 
-    <div class="burger"></div>
+    <div class="burger light"></div>
 
     <div class="audio-wrapper">
       <audio id="bgAudio" src="assets/media/bg-audio.mp3" preload="auto" controls loop></audio>
@@ -141,11 +124,11 @@
       </div>
       <div class="main-nav-wrap">
         <ul class="main-nav">
-          <li><a href="#">На главную</a></li>
-          <li><a href="#">Майназаров Н.</a></li>
-          <li><a href="#">Услуги</a></li>
-          <li><a href="#">Команда</a></li>
-          <li><a href="#">Отзывы</a></li>
+          <li><a href="javascript:void(0);" data-switchto="home">На главную</a></li>
+          <li><a href="javascript:void(0);" data-switchto="about">Майназаров Н.</a></li>
+          <li><a href="javascript:void(0);" data-switchto="services">Услуги</a></li>
+          <li><a href="javascript:void(0);" data-switchto="team">Команда</a></li>
+          <li><a href="javascript:void(0);" data-switchto="testimonials">Отзывы</a></li>
           <li><a href="#">Галерея</a></li>
           <li><a href="#">Контакты</a></li>
         </ul>

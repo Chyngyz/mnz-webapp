@@ -1,3 +1,7 @@
+.menu-wrap {
+  visibility: hidden;
+}
+
 .main-nav-wrap {
   position: fixed;
   z-index:5;
@@ -48,6 +52,7 @@
     text-decoration: none;
     @include transition(color .1s ease-in);
     position: relative;
+    letter-spacing: 2px;
 
     &:after {
       content: '';

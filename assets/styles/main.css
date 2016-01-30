@@ -380,11 +380,11 @@
     -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
     transform: skewX(-0.78125deg) skewY(-0.78125deg); }
   77.7% {
-    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
-    transform: skewX(0.390625deg) skewY(0.390625deg); }
+    -webkit-transform: skewX(0.39063deg) skewY(0.39063deg);
+    transform: skewX(0.39063deg) skewY(0.39063deg); }
   88.8% {
-    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
-    transform: skewX(-0.1953125deg) skewY(-0.1953125deg); } }
+    -webkit-transform: skewX(-0.19531deg) skewY(-0.19531deg);
+    transform: skewX(-0.19531deg) skewY(-0.19531deg); } }
 @keyframes jello {
   from, 11.1%, to {
     -webkit-transform: none;
@@ -405,11 +405,11 @@
     -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
     transform: skewX(-0.78125deg) skewY(-0.78125deg); }
   77.7% {
-    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
-    transform: skewX(0.390625deg) skewY(0.390625deg); }
+    -webkit-transform: skewX(0.39063deg) skewY(0.39063deg);
+    transform: skewX(0.39063deg) skewY(0.39063deg); }
   88.8% {
-    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
-    transform: skewX(-0.1953125deg) skewY(-0.1953125deg); } }
+    -webkit-transform: skewX(-0.19531deg) skewY(-0.19531deg);
+    transform: skewX(-0.19531deg) skewY(-0.19531deg); } }
 .jello {
   -webkit-animation-name: jello;
   animation-name: jello;
@@ -2820,11 +2820,18 @@ video {
   top: 25px;
   right: 25px;
   z-index: 20;
-  color: #fff;
+  color: transparent;
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
   border-bottom: 2px solid currentColor;
   width: 28px;
   transition: border-bottom 1s ease-in-out;
   -webkit-transition: border-bottom 1s ease-in-out; }
+  .burger.light {
+    color: #fff; }
+  .burger.dark {
+    color: #4a4a4a; }
   .burger::-moz-focus-inner {
     border: 0;
     padding: 0; }
@@ -3127,6 +3134,9 @@ video {
     -ms-transform: translateY(-2000px);
     -o-transform: translateY(-2000px);
     transform: translateY(-2000px); } }
+.menu-wrap {
+  visibility: hidden; }
+
 .main-nav-wrap {
   position: fixed;
   z-index: 5;
@@ -3171,7 +3181,8 @@ video {
     -webkit-transition: color 0.1s ease-in;
     -moz-transition: color 0.1s ease-in;
     transition: color 0.1s ease-in;
-    position: relative; }
+    position: relative;
+    letter-spacing: 2px; }
     .main-nav a:after {
       content: '';
       height: 1px;
