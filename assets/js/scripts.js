@@ -110,9 +110,15 @@
     var loader = new Loader();
 
     function menuTrigger () {
+      var menuState = false;
       $('.burger').click(function () {
         $(this).toggleClass('open');
-        openMenu(true);
+        if(!menuState) {
+          openMenu(true);
+        } else {
+          openMenu(false);
+        }
+        menuState = !menuState;
       })
     }
 
@@ -145,7 +151,6 @@
         contactsIn();
       }, 1000);
       setContent('about');
-      console.log('asdf');
     };
     
     var contacts = $('.contacts'),
@@ -182,18 +187,25 @@
 
     // Fix from starting here
 
+    var bg = $('.white-overlay')[0],
+        bgImg = $('.menu-img')[0],
+        skewP = $('.global-overlay')[0],
+        nurik = $('.menu-n')[0],
+        logo = $('.menu-logo')[0],
+        callBtn = $('.call-sm')[0],
+        nav = $('.main-nav-wrap')[0],
+        ul = $('.main-nav')[0];
 
-    var bg = $('.menu-wrap').children()[0],
-        bgImg = $('.white-overlay'),
-        skewP = $('.global-overlay'),
-        nurik = $('.menu-n'),
-        logo = $('.menu-logo'),
-        callBtn = $('.call-sm'),
-        nav = $('.main-nav-wrap'),
-        ul = $('.main-nav');
+    console.log(bgImg);
 
     function openMenu(openMenu) {
+      
+
       if(openMenu) {
+        TweenMax.set(nurik, {
+          x: '-200'
+        });
+
         var tl = new TimelineLite();
         tl.to(bg, 0.2, {
           opacity: 1,
@@ -202,17 +214,18 @@
         })
           .to(skewP, 0.3, {
           x: '0%',
-          ease: Back.easeIn
+          ease: Power4.easeIn
         })
           .to(bgImg, 0.4, {
             backgroundImage: "url('../assets/images/menu-bg.jpg')",
             opacity: 1,
             ease: Power3.easeIn
           },'-=0.2')
-          .to(nurik,0.5, {
+          .to(nurik,0.4, {
             opacity: 1,
+            x: 0,
             visibility: "visible",
-            ease: Expo.easeIn,
+            ease: Power1.easeIn,
             onComplete: function () {
               TweenMax.staggerTo($(ul).children(), 0.2, {
                 visibility: 'visible',
@@ -231,7 +244,7 @@
             scale: 1,
             ease: Expo.easeIn,
             onComplete: function () {
-              callParal(nurik[0]);
+              //callParal(nurik);
             }
           },'-=0.1');
       } else {
@@ -302,9 +315,8 @@
       fillObjectArray();
       positionDivs();
 
-      function fillObjectArray()
-      {
-        var birdDiv = $(el).children()[1];
+      function fillObjectArray() {
+        var birdDiv = $(el)[0];
         var birdX = 212; //position div from half width of the page
         var birdY = 33;
         var birdFactor = 0.05; //parallax shift factor, the bigger the value, the more it shift for parallax movement
@@ -312,21 +324,12 @@
         birdArray.push(birdDiv, birdX, birdY, birdFactor);
         objectArray.push(birdArray);
 
-        //var bush1Div = document.getElementById("bush1");
-        //var bush1X = -28;
-        //var bush1Y = 352;
-        //var bush1Factor = 0.06;
-        //var bush1Array = new Array();
-        //bush1Array.push(bush1Div, bush1X, bush1Y, bush1Factor);
-        //objectArray.push(bush1Array);
-
 
       }
 
       // Main function to retrieve mouse x-y pos.s
 
-      function getMouseXY(e)
-      {
+      function getMouseXY(e) {
 
         // grab the x-y pos.s if browser is NS
         tempX = e.pageX;
@@ -341,11 +344,9 @@
         return true
       }
 
-      function moveDiv(tempX)
-      {
+      function moveDiv(tempX) {
 
-        for (var i=0;i<objectArray.length;i++)
-        {
+        for (var i=0;i<objectArray.length;i++) {
           var yourDivPositionX = objectArray[i][3] * (0.5 * 1365 - tempX) + objectArray[i][1];
           objectArray[i][0].style.left = yourDivPositionX + 'px';
           console.log(yourDivPositionX);
@@ -353,6 +354,7 @@
       }
 
       function positionDivs() {
+        console.log(objectArray);
         for (var i=0;i<objectArray.length;i++)
         {
           objectArray[i][0].style.left = objectArray[i][1] + "px";
@@ -378,7 +380,7 @@
       routing('hash');
       navigation();
       menuTrigger();
-      //startAudio();
+      startAudio();
       setTimeout(function () {
         loader.hide();
       }, 0);
