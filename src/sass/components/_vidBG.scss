@@ -19,7 +19,7 @@ video {
   height: auto;
   z-index: -100;
   @include transform(translate(-50%, -50%));
-  background: url('../images/poster.jpg') no-repeat;
+  background: url('../images/video-poster.jpg') no-repeat;
   background-size: cover;
   background-position: center center;
   transition: 1s opacity;

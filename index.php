@@ -124,13 +124,23 @@
       </div>
       <div class="main-nav-wrap">
         <ul class="main-nav">
-          <li><a href="javascript:void(0);" data-switchto="home">На главную</a></li>
-          <li><a href="javascript:void(0);" data-switchto="about">Майназаров Н.</a></li>
-          <li><a href="javascript:void(0);" data-switchto="services">Услуги</a></li>
-          <li><a href="javascript:void(0);" data-switchto="team">Команда</a></li>
-          <li><a href="javascript:void(0);" data-switchto="testimonials">Отзывы</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="home">На главную</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="about">Майназаров Н.</a></li>
+          <li><a href="javascript:void(0);" id="nav-service">Услуги</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="team">Команда</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="testimonials">Отзывы</a></li>
           <li><a href="#">Галерея</a></li>
           <li><a href="#">Контакты</a></li>
+        </ul>
+        <ul class="main-nav service-nav">
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-tv">ТВ и радио </a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="about">Частные события</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link nav-services">Корпоративные события</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="team">Официальные встречи</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="testimonials">Организация и проведение</a></li>
+          <li>
+            <a href="javascript:void(0);" id="back-btn" class="back-btn">назад</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -154,6 +164,7 @@
     <script src="<?php echo $root; ?>assets/js/vendor/customScrollBar/jquery.mousewheel.min.js"></script>
     <script src="<?php echo $root; ?>assets/js/vendor/customScrollBar/jquery.mCustomScrollbar.js"></script>
     <script src="<?php echo $root; ?>assets/js/vendor/vegas/vegas.js"></script>
+    <script src="<?php echo $root; ?>assets/js/vendor/mpopup/jquery.magnific-popup.js"></script>
 
     
     

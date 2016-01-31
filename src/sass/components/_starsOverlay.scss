@@ -8,7 +8,6 @@
   z-index:4;
   visibility: hidden;
   opacity:0;
-  //@include transition(all 0.3s cubic-bezier(0.7, 0, 0.3, 1));
 
 
   &.open {
@@ -18,8 +17,6 @@
     .menu-img {
       background-image: url('../assets/images/menu-bg.jpg');
       opacity:1;
-      //@include transition(opacity .5s ease-in-out);
-      //@include transition-delay(1s);
     }
   }
 
@@ -36,6 +33,19 @@
     opacity:0;
   }
 
+}
+
+.bg-img {
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 65%;
+  background-repeat:no-repeat;
+  -webkit-background-size:cover;
+  background-size:cover;
+  background-position: 50% 50%;
+  opacity:0;
 }
 
 .menu-n {
@@ -92,6 +102,10 @@
 
   &.skew-part {
     @include transform(skew(25deg, 0deg));
+  }
+
+  &.skew-part-2 {
+    @include transform(skew(-25deg, 0deg));
   }
 }
 

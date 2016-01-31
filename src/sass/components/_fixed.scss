@@ -44,6 +44,15 @@
   cursor: pointer;
   z-index:4;
   @include transform(scale(0.8));
+  @include transition(all 0.2s ease-in-out);
+
+  &:hover {
+    background-color: $c-prim;
+
+    span {
+      color: #fff;
+    }
+  }
 
   span {
     position: absolute;
@@ -201,7 +210,7 @@
   }
 }
 
-.menu-logo {
+.menu-logo, .logo-hor {
   position: absolute;
   left: 35px;
   top: 23px;

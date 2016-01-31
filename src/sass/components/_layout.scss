@@ -30,8 +30,13 @@
 	&--text {
 		margin: 100px auto;
 	    width: 80%;
-	    height: 80%;
+	    height: 75%;
 		overflow-x: hidden;
 		overflow-y: auto;
+
+		p {
+			line-height: rem(30);
+			color: $c-dark;
+		}
 	}
 }

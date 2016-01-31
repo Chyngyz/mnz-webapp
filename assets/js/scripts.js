@@ -7,11 +7,11 @@
         'home':function () {
           homeFn();
         },
-        'services/:service': function (params) {
-          setContent(null, params.service);
+        'service-tv/details': function (params) {
+          servicesTvDetailFn();
         },
-        'services': function () {
-          setContent('services');
+        'services-tv': function () {
+          servicesTvFn();
         },
         'about': function () {
           aboutFn();
@@ -41,13 +41,9 @@
 
     // Main navigation
     function navigation () {
-      var currentRoute = window.location.hash || 'home';
-      if(currentRoute != 'home') {
-        currentRoute = currentRoute.slice(1);
-      }
       []
       .slice
-      .call(document.querySelectorAll('.main-nav a'))
+      .call(document.querySelectorAll('.main-nav a.main-nav-link'))
       .forEach(function (link) {
         if (link.getAttribute('href').indexOf('http') >= 0) return;
         link.addEventListener('click', function (e) {
@@ -124,17 +120,33 @@
       logoColor: 'light'
     };
 
+
     var burger = $('.burger')[0];
     $(burger).on('click', function () {
       var $this = $(this); 
       $this.toggleClass('open');
+      var location = window.location.hash;
       if(!pageStates.menuState) {
         if(pageStates.burgerColor == 'dark' || $this.hasClass('dark')) {
           $this.removeClass('dark').addClass('light');
         }
+        if(location == '#about') {
+          contactsAnimation();
+        } else if(location == '#service-tv') {
+          contactsAnimation();
+        }
         openMenu(true);
       } else {
         openMenu(false);
+        if(location == '#about') {
+          hideContacts();
+        } else if(location == '#service-tv') {
+          var el = $('.tv-service .menu-n')[0];
+          setTimeout(function () {
+            callParal(el);
+          }, 1500);
+        }
+
         if(pageStates.burgerColor == 'dark') {
           $this.removeClass('light').addClass('dark');
         }
@@ -180,11 +192,79 @@
         callBtn = $('.call-sm')[0],
         nav = $('.main-nav-wrap')[0],
         ul = $('.main-nav')[0],
+        ulServices = $('.main-nav')[1],
         menuWrap = $('.menu-wrap')[0];
+
+    var servicesNavOpen = false;
+
+    $('#nav-service').click(function () {
+      servicesNavOpen = true;
+      var tl = new TimelineLite();
+      tl.staggerTo($(ul).children(), 0.2, {
+        opacity: 0,
+        x:'100',
+        ease: Back.easeOut
+      }, 0.1)
+        .staggerTo($(ulServices).children(), 0.2, {
+        visibility: 'visible',
+        opacity: 1,
+        x:'0',
+        ease: Power1.easeIn
+      }, 0.1);
+    })
+
+    $('#back-btn').click(function () {
+        servicesNavOpen = false;
+        var tl = new TimelineLite();
+        var li = $(ulServices).children();
+        tl.staggerTo(li, 0.3, {
+          opacity: 0,
+          x:'100',
+          ease: Back.easeOut,
+          onComplete: function () {
+            setTimeout(function () {
+              for(var i=0; i< $(li).length; i++) {
+                TweenMax.set($(li)[i], {
+                  visibility: 'hidden'
+                });
+              }
+            }, 200);
+          }
+        }, 0.1)
+          .staggerTo($(ul).children(), 0.2, {
+          visibility: 'visible',
+          opacity: 1,
+          x:'0',
+          ease: Power1.easeIn
+        }, 0.1);
+    });
+
+    function hideServiceNav () {
+      var li = $(ulServices).children();
+      TweenMax.to(li, 0.2, {
+        x: '100',
+        opacity: 0,
+        ease: Power1.easeOut,
+        onComplete: function () {
+          for(var i=0; i< $(li).length; i++) {
+            TweenMax.set($(li)[i], {
+              visibility: 'hidden'
+            });
+          }
+        }
+      })
+    }
+
+    function showLogo (elem) {
+      TweenMax.to(elem, 0.3, {
+        opacity: 1,
+        y: '0%',
+        ease: Expo.easeIn
+      });
+    }
 
     function openMenu(openMenu) {
       
-
       if(openMenu) {
         $(menuWrap).css('visibility', 'visible');
         TweenMax.set(nurik, {
@@ -229,7 +309,7 @@
             scale: 1,
             ease: Expo.easeIn,
             onComplete: function () {
-              //callParal(nurik);
+              callParal(nurik);
             }
           },'-=0.1');
       } else {
@@ -250,6 +330,11 @@
                 visibility: 'hidden'
               })
             }
+
+            if(servicesNavOpen) {
+              hideServiceNav();
+            }
+
           }
         })
           .to(callBtn, 0.3, {
@@ -296,16 +381,15 @@
       hideContacts();
 
       setTimeout(function () {
-        TweenMax.staggerTo($(contacts).children(), 0.3, {
+        TweenMax.staggerTo($(contacts).children(), 0.2, {
           x:0,
-          ease: Power1.easeIn
-        }, 0.2);
+          ease: Back.easeInOut
+        }, 0.1);
       }, 2000);
     }
 
 
     function callParal(el) {
-
       // Set-up to use getMouseXY function onMouseMove
       document.onmousemove = getMouseXY;
 
@@ -317,7 +401,7 @@
       var objectArray = new Array();
 
       fillObjectArray();
-      positionDivs();
+      //positionDivs();
 
       function fillObjectArray() {
         var birdDiv = $(el)[0];
@@ -353,7 +437,7 @@
         for (var i=0;i<objectArray.length;i++) {
           var yourDivPositionX = objectArray[i][3] * (0.5 * 1365 - tempX) + objectArray[i][1];
           objectArray[i][0].style.left = yourDivPositionX + 'px';
-          console.log(yourDivPositionX);
+          //console.log(yourDivPositionX);
         }
       }
 
@@ -380,8 +464,6 @@
         }, 1500);
         var hero = $('.brand-wrap');
 
-        
-
         TweenMax.set($(hero).children(), {
           y: 100,
           opacity: 0
@@ -399,6 +481,8 @@
       }
     }
 
+
+
     function aboutFn () {
       setContent('about', null, runAbout);
 
@@ -406,6 +490,8 @@
       hideContacts();
 
       function runAbout () {
+        var logoPages = $('.logo-hor')[0];
+
         setTimeout(function () {
           $(burger).removeClass('light').addClass('dark');
           
@@ -415,18 +501,143 @@
 
           $(".m-left-slideshow").vegas({
               slides: [
-                  { src: "assets/images/slide-1.jpg" },
-                  { src: "assets/images/slide-2.jpg" },
-                  { src: "assets/images/slide-3.jpg" },
-                  { src: "assets/images/menu-bg.jpg" }
+                  { src: "assets/images/about/1.jpg" },
+                  { src: "assets/images/about/2.jpg" },
+                  { src: "assets/images/about/3.jpg" },
+                  { src: "assets/images/about/4.jpg" }
               ],
               transition: 'fade2',
+              preload: true,
+              delay: 7000,
               animation: 'kenburnsUpLeft'
           });
+
+          showLogo(logoPages);
         }, 1500);
       }
     }
 
+    function servicesTvFn () {
+      setContent('services-tv', null, runTV);
+
+      pageStates.burgerColor = 'light';
+
+
+      function runTV () {
+        $('.more-details').click(function () {
+          var wrap = $('.tv-service');
+          TweenMax.to(wrap, 0.3, {
+            opacity: 0,
+            ease: Power1.easeOut,
+            onComplete: function () {
+              router.navigate('service-tv/details');
+            }
+          })
+        });
+
+        $('.watch-intro').click(function (e) {
+          e.preventDefault();
+          console.log('click');
+          $(this).magnificPopup({
+            type: 'iframe',
+            iframe: {
+               markup: '<div class="mfp-iframe-scaler">'+
+                          '<div class="mfp-close"></div>'+
+                          '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                          '<div class="mfp-title">Some caption</div>'+
+                        '</div>'
+            }         
+            
+          });
+        });
+        setTimeout(function () {
+          enterTv();
+          contactsAnimation();
+        }, 2000);
+      }
+    }
+
+    function enterTv () {
+
+      var wrap = $('.tv-service');
+      var tvOverlay = $(wrap).find('.global-overlay')[0],
+          tvN = $(wrap).find('.menu-n')[0],
+          tvBgImg = $(wrap).find('.bg-img')[0],
+          tvLogo = $(wrap).find('.menu-logo')[0],
+          tvCallBtn = $(wrap).find('.call-sm')[0],
+          tvContent = $(wrap).find('.service-content')[0];
+
+
+
+      TweenMax.set(tvN, {
+        x: '-200'
+      });
+
+      var tl = new TimelineLite();
+      tl
+        .to(tvOverlay, 0.3, {
+        x: '0%',
+        ease: Power4.easeIn
+      })
+        .to(tvBgImg, 0.4, {
+          backgroundImage: "url('../assets/images/menu-bg.jpg')",
+          opacity: 1,
+          ease: Power3.easeIn
+        },'-=0.2')
+        .to(tvN,0.4, {
+          opacity: 1,
+          x: 0,
+          visibility: "visible",
+          ease: Power1.easeIn
+        })
+        .to(tvContent,0.2, {
+          opacity:1,
+          ease: Power1.easeIn
+        }, '-=0.2')
+        .to(tvLogo, 0.3, {
+          opacity: 1,
+          y: '0%',
+          ease: Expo.easeIn
+        }, '-=0.2')
+        .to(tvCallBtn, 0.3, {
+          scale: 1,
+          ease: Expo.easeIn,
+          onComplete: function () {
+            callParal(tvN);
+          }
+        },'-=0.1');
+    }
+
+
+    function servicesTvDetailFn () {
+      setContent('services-tv-details', null, tvDetails);
+
+      function tvDetails () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+        
+        $(".m-right-content--text").mCustomScrollbar({
+          theme: 'dark'
+        });
+
+        $(".m-left-slideshow").vegas({
+            slides: [
+                { src: "assets/images/about/1.jpg" },
+                { src: "assets/images/about/2.jpg" },
+                { src: "assets/images/about/3.jpg" },
+                { src: "assets/images/about/4.jpg" }
+            ],
+            transition: 'fade2',
+            preload: true,
+            delay: 7000,
+            animation: 'kenburnsUpLeft'
+        });
+
+        showLogo(logoPages);
+        
+      }
+    }
     
 
 

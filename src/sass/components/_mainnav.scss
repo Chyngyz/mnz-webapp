@@ -14,6 +14,29 @@
   margin: 0;
   padding: 0;
 
+  &.service-nav {
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    //@include transform(translateX(100%));
+
+    li {
+      left: 200px;
+    }
+
+    .back-btn {
+      font-family: $natoText;
+      font-size: rem(18);
+      margin-top: 35px;
+      margin-left: 15px;
+      color: #ccc;
+
+      &:hover {
+        color: $c-prim;
+      }
+    }
+  }
+
   li {
     display: block;
     visibility: hidden;
@@ -53,6 +76,7 @@
     @include transition(color .1s ease-in);
     position: relative;
     letter-spacing: 2px;
+    white-space: nowrap;
 
     &:after {
       content: '';
