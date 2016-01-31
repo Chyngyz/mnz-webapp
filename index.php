@@ -151,6 +151,9 @@
     <script src="<?php echo $root; ?>assets/js/vendor/navigo/navigo.min.js"></script>
     <script src="<?php echo $root; ?>assets/js/vendor/gsap/TweenMax.min.js"></script>
     <script src="<?php echo $root; ?>assets/js/vendor/gsap/TimelineLite.min.js"></script>
+    <script src="<?php echo $root; ?>assets/js/vendor/customScrollBar/jquery.mousewheel.min.js"></script>
+    <script src="<?php echo $root; ?>assets/js/vendor/customScrollBar/jquery.mCustomScrollbar.js"></script>
+    <script src="<?php echo $root; ?>assets/js/vendor/vegas/vegas.js"></script>
 
     
     

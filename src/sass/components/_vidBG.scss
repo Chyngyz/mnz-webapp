@@ -21,6 +21,7 @@ video {
   @include transform(translate(-50%, -50%));
   background: url('../images/poster.jpg') no-repeat;
   background-size: cover;
+  background-position: center center;
   transition: 1s opacity;
 }
 

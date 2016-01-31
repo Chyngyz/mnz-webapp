@@ -408,6 +408,21 @@
       function runAbout () {
         setTimeout(function () {
           $(burger).removeClass('light').addClass('dark');
+          
+          $(".m-right-content--text").mCustomScrollbar({
+            theme: 'dark'
+          });
+
+          $(".m-left-slideshow").vegas({
+              slides: [
+                  { src: "assets/images/slide-1.jpg" },
+                  { src: "assets/images/slide-2.jpg" },
+                  { src: "assets/images/slide-3.jpg" },
+                  { src: "assets/images/menu-bg.jpg" }
+              ],
+              transition: 'fade2',
+              animation: 'kenburnsUpLeft'
+          });
         }, 1500);
       }
     }
