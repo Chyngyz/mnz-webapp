@@ -122,7 +122,12 @@
 
 
     var burger = $('.burger')[0];
+    var clickDisabled = false;
     $(burger).on('click', function () {
+      if(clickDisabled) {
+        return;
+      }
+      clickDisabled = true;
       var $this = $(this); 
       $this.toggleClass('open');
       var location = window.location.hash;
@@ -132,7 +137,7 @@
         }
         if(location == '#about') {
           contactsAnimation();
-        } else if(location == '#service-tv') {
+        } else if(location == '#service-tv' || location == '#service-tv/details') {
           contactsAnimation();
         }
         openMenu(true);
@@ -143,8 +148,10 @@
         } else if(location == '#service-tv') {
           var el = $('.tv-service .menu-n')[0];
           setTimeout(function () {
-            callParal(el);
+            callParal($('.tv-service .menu-n')[0]);
           }, 1500);
+        } else if(location == '#service-tv/details') {
+          hideContacts();
         }
 
         if(pageStates.burgerColor == 'dark') {
@@ -152,6 +159,9 @@
         }
       }
       pageStates.menuState = !pageStates.menuState;
+      setTimeout(function () {
+        clickDisabled = false;
+      }, 2000);
     });
     
 
@@ -404,13 +414,13 @@
       //positionDivs();
 
       function fillObjectArray() {
-        var birdDiv = $(el)[0];
-        var birdX = 212; //position div from half width of the page
-        var birdY = 33;
-        var birdFactor = 0.05; //parallax shift factor, the bigger the value, the more it shift for parallax movement
-        var birdArray = new Array();
-        birdArray.push(birdDiv, birdX, birdY, birdFactor);
-        objectArray.push(birdArray);
+        var nurDiv = $(el)[0];
+        var nurX = 212; //position div from half width of the page
+        var nurY = 33;
+        var nurFactor = 0.05; //parallax shift factor, the bigger the value, the more it shift for parallax movement
+        var nurArray = new Array();
+        nurArray.push(nurDiv, nurX, nurY, nurFactor);
+        objectArray.push(nurArray);
 
 
       }
@@ -639,12 +649,6 @@
       }
     }
     
-
-
-
-
-
-
 
 
 

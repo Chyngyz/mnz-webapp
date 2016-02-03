@@ -3038,7 +3038,8 @@ video {
   -moz-transform: translateX(-200px);
   -ms-transform: translateX(-200px);
   -o-transform: translateX(-200px);
-  transform: translateX(-200px); }
+  transform: translateX(-200px);
+  will-change: left, transform; }
   .menu-n img {
     height: 100%;
     width: auto; }

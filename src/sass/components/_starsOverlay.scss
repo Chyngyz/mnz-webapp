@@ -57,8 +57,7 @@
   overflow: hidden;
   opacity:0;
   @include transform(translateX(-200px));
-  //@include transition(opacity .3s ease-in-out);
-  //@include transition-delay(1.5s);
+  will-change: left, transform;
   img {
     height: 100%;
     width: auto;
