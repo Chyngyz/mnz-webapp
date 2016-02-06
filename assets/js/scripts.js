@@ -18,7 +18,7 @@
         },
 
         'team': function () {
-          setContent('team');
+          teamFn();
         },
         'testimonials': function () {
           setContent('testimonials');
@@ -139,7 +139,10 @@
           contactsAnimation();
         } else if(location == '#service-tv' || location == '#service-tv/details') {
           contactsAnimation();
+        } else if(location == '#team') {
+          contactsAnimation();
         }
+
         openMenu(true);
       } else {
         openMenu(false);
@@ -151,6 +154,8 @@
             callParal($('.tv-service .menu-n')[0]);
           }, 1500);
         } else if(location == '#service-tv/details') {
+          hideContacts();
+        } else if(location == '#team') {
           hideContacts();
         }
 
@@ -646,6 +651,19 @@
 
         showLogo(logoPages);
         
+      }
+    }
+
+    function teamFn () {
+      setContent('team', null, team);
+
+      pageStates.burgerColor = 'dark';
+
+      function team () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+        showLogo(logoPages);
       }
     }
     
