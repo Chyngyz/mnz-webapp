@@ -147,7 +147,7 @@
   z-index:20;
   color: transparent;
   @include transition(color .2s ease-in-out);
-  
+
 
   border-bottom: $thickness solid currentColor;
   width: $width;
@@ -217,7 +217,8 @@
   width: 175px;
   height: 45px;
   opacity:0;
-  z-index:5;
+  z-index:45;
+  display: block;
   @include transform(translateY(-100%));
 
   svg {

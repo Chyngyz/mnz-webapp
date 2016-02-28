@@ -1,9 +1,22 @@
-.title {
+.title, h1, h2, h3 {
 	font-family: $natoHead;
 	color: $c-dark;
-	font-size: rem(32);
-	line-height: rem(64);
+	line-height: rem(38);
+  font-weight:400;
 }
+
+.title, h1 {
+  font-size:rem(32);
+}
+
+h2 {
+  font-size:rem(24);
+}
+
+h3 {
+  font-size:rem(20);
+}
+
 
 .service-content {
 	position: absolute;
@@ -20,16 +33,18 @@
     }
 
     .more-details, .watch-intro {
-		cursor: pointer;
-		margin-bottom: 10px;
-		color: white;
-		display: block;
+      cursor: pointer;
+      margin-bottom: 10px;
+      color: white;
+      display: block;
+      outline: none;
+      text-decoration: none;
 
-		&:hover {
-			.icon-title {
-				color: $c-prim;
-			}
-		}
+      &:hover {
+        .icon-title {
+          color: $c-prim;
+        }
+      }
     }
 
     .icon {

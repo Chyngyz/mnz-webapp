@@ -34,7 +34,7 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 
-		p {
+		p, li {
 			line-height: rem(30);
 			color: $c-dark;
 		}

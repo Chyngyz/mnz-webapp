@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="assets/styles/vendor.css">
     <link rel="stylesheet" href="assets/styles/main.css">
-  
+
     <script src="<?php echo $root; ?>assets/js/vendor/modernizr/modernizr.js"></script>
   </head>
   <body>
@@ -39,7 +39,7 @@
     </div>
     <!-- END: App-Loading Screen. -->
 
-    
+
     <div class="main-content"></div>
 
     <!-- <nav>
@@ -63,7 +63,7 @@
         <span class="audio-player--title">вык</span>
       </div>
     </div>
-    
+
 
     <div class="contacts">
       <div class="tel">+(996) 773 777 555<br>+(996) 554 999 223</div>
@@ -116,9 +116,9 @@
           <div id="stars3"></div>
         </div>
       </div>
-      <div class="menu-logo">
+      <a href="/" class="menu-logo">
         <img src="../assets/images/logo-hor.svg" alt="">
-      </div>
+      </a>
       <div class="call-sm" call-hover-sm>
         <span>Заказать<br>звонок</span>
       </div>
@@ -134,20 +134,20 @@
         </ul>
         <ul class="main-nav service-nav">
           <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-tv">ТВ и радио </a></li>
-          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="about">Частные события</a></li>
-          <li><a href="javascript:void(0);" class="main-nav-link nav-services">Корпоративные события</a></li>
-          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="team">Официальные встречи</a></li>
-          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="testimonials">Организация и проведение</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-private">Частные события</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-corporate">Корпоративные события</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-official">Официальные встречи</a></li>
+          <li><a href="javascript:void(0);" class="main-nav-link" data-switchto="services-organization">Организация и проведение</a></li>
           <li>
             <a href="javascript:void(0);" id="back-btn" class="back-btn">назад</a>
           </li>
         </ul>
       </div>
     </div>
-  
 
-    
-    
+
+
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -166,8 +166,8 @@
     <script src="<?php echo $root; ?>assets/js/vendor/vegas/vegas.js"></script>
     <script src="<?php echo $root; ?>assets/js/vendor/mpopup/jquery.magnific-popup.js"></script>
 
-    
-    
+
+
     <script src="<?php echo $root; ?>assets/js/scripts.js"></script>
   </body>
 </html>

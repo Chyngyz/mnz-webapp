@@ -7,11 +7,35 @@
         'home':function () {
           homeFn();
         },
-        'service-tv/details': function (params) {
+        'service-tv/details': function () {
           servicesTvDetailFn();
         },
         'services-tv': function () {
           servicesTvFn();
+        },
+        'service-private/details': function () {
+          servicesPrivateDetailFn();
+        },
+        'services-private': function () {
+          servicesPrivateFn();
+        },
+        'service-corporate/details': function () {
+          servicesCorporateDetailFn();
+        },
+        'services-corporate': function () {
+          servicesCorporateFn();
+        },
+        'service-official/details': function () {
+          servicesOfficialDetailFn();
+        },
+        'services-official': function () {
+          servicesOfficialFn();
+        },
+        'service-organization/details': function () {
+          servicesOrganizeDetailFn();
+        },
+        'services-organization': function () {
+          servicesOrganizeFn();
         },
         'about': function () {
           aboutFn();
@@ -34,10 +58,10 @@
     function setContent(id, content, cb) {
       var slug = id || 'services-' + content;
       $('.main-content').load('partial/' + slug + '.html', function () {
-        console.log('Loaded ' + slug);
+        // console.log('Loaded ' + slug);
         cb();
       })
-    };
+    }
 
     // Main navigation
     function navigation () {
@@ -52,7 +76,7 @@
           $(burger).trigger('click');
         });
       });
-    };
+    }
 
 
     // Close loading
@@ -128,7 +152,7 @@
         return;
       }
       clickDisabled = true;
-      var $this = $(this); 
+      var $this = $(this);
       $this.toggleClass('open');
       var location = window.location.hash;
       if(!pageStates.menuState) {
@@ -139,10 +163,17 @@
           contactsAnimation();
         } else if(location == '#service-tv' || location == '#service-tv/details') {
           contactsAnimation();
+        } else if(location == '#service-private' || location == '#service-private/details') {
+          contactsAnimation();
+        } else if(location == '#service-corporate' || location == '#service-corporate/details') {
+          contactsAnimation();
+        } else if(location == '#service-official' || location == '#service-official/details') {
+          contactsAnimation();
+        } else if(location == '#service-organization' || location == '#service-organization/details') {
+          contactsAnimation();
         } else if(location == '#team') {
           contactsAnimation();
         }
-
         openMenu(true);
       } else {
         openMenu(false);
@@ -154,6 +185,14 @@
             callParal($('.tv-service .menu-n')[0]);
           }, 1500);
         } else if(location == '#service-tv/details') {
+          hideContacts();
+        } else if(location == '#service-private/details') {
+          hideContacts();
+        } else if(location == '#service-corporate/details') {
+          hideContacts();
+        } else if(location == '#service-official/details') {
+          hideContacts();
+        } else if(location == '#service-organization/details') {
           hideContacts();
         } else if(location == '#team') {
           hideContacts();
@@ -168,7 +207,7 @@
         clickDisabled = false;
       }, 2000);
     });
-    
+
 
     // Audio vars
     var $audioPlayerWrap = $('.audio-wrapper'),
@@ -193,7 +232,7 @@
       audio.play();
       $audioPlayer.addClass('playing');
       $audioTitle.html('вкл');
-    };    
+    };
 
 
 
@@ -279,7 +318,7 @@
     }
 
     function openMenu(openMenu) {
-      
+
       if(openMenu) {
         $(menuWrap).css('visibility', 'visible');
         TweenMax.set(nurik, {
@@ -388,19 +427,34 @@
     var contacts = $('.contacts');
     function hideContacts () {
       TweenMax.set($(contacts).children(), {
-        x: 200
+        x: 200,
+        onComplete: function() {
+          TweenMax.set(contacts, {
+            visibility: 'hidden'
+          });
+        }
       });
     }
 
     function contactsAnimation () {
       hideContacts();
-
+      TweenMax.set(contacts, {
+        visibility: 'visible'
+      });
       setTimeout(function () {
         TweenMax.staggerTo($(contacts).children(), 0.2, {
           x:0,
           ease: Back.easeInOut
         }, 0.1);
       }, 2000);
+    }
+
+    function lightenBurger() {
+      $(burger).removeClass('dark').addClass('light');
+    }
+
+    function darkenBurger() {
+      $(burger).removeClass('light').addClass('dark');
     }
 
 
@@ -465,7 +519,7 @@
       }
     }
 
-
+    // Home Fn
     function homeFn () {
       setContent('home', null, runHome);
 
@@ -496,8 +550,7 @@
       }
     }
 
-
-
+    // About Fn
     function aboutFn () {
       setContent('about', null, runAbout);
 
@@ -509,7 +562,7 @@
 
         setTimeout(function () {
           $(burger).removeClass('light').addClass('dark');
-          
+
           $(".m-right-content--text").mCustomScrollbar({
             theme: 'dark'
           });
@@ -532,9 +585,499 @@
       }
     }
 
+    // Organization Fns
+    function servicesOrganizeFn () {
+      setContent('services-organize', null, runOrganize);
+      lightenBurger();
+      pageStates.burgerColor = 'light';
+
+      function runOrganize () {
+        $('.more-details').click(function () {
+          var wrap = $('.tv-service');
+          TweenMax.to(wrap, 0.3, {
+            opacity: 0,
+            ease: Power1.easeOut,
+            onComplete: function () {
+              router.navigate('service-organization/details');
+            }
+          })
+        });
+
+        $('.watch-intro').click(function (e) {
+          e.preventDefault();
+          console.log('click');
+          $(this).magnificPopup({
+            type: 'iframe',
+            iframe: {
+              markup: '<div class="mfp-iframe-scaler">'+
+              '<div class="mfp-close"></div>'+
+              '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+              '<div class="mfp-title">Some caption</div>'+
+              '</div>'
+            }
+          });
+        });
+        setTimeout(function () {
+          enterOrganize();
+          contactsAnimation();
+        }, 2000);
+      }
+    }
+
+    function enterOrganize () {
+
+      var wrap = $('.tv-service');
+      var tvOverlay = $(wrap).find('.global-overlay')[0],
+        tvN = $(wrap).find('.menu-n')[0],
+        tvBgImg = $(wrap).find('.bg-img')[0],
+        tvLogo = $(wrap).find('.menu-logo')[0],
+        tvCallBtn = $(wrap).find('.call-sm')[0],
+        tvContent = $(wrap).find('.service-content')[0];
+
+
+
+      TweenMax.set(tvN, {
+        x: '-200'
+      });
+
+      var tl = new TimelineLite();
+      tl
+        .to(tvOverlay, 0.3, {
+          x: '0%',
+          ease: Power4.easeIn
+        })
+        .to(tvBgImg, 0.4, {
+          backgroundImage: "url('../assets/images/menu-bg.jpg')",
+          opacity: 1,
+          ease: Power3.easeIn
+        },'-=0.2')
+        .to(tvN,0.4, {
+          opacity: 1,
+          x: 0,
+          visibility: "visible",
+          ease: Power1.easeIn
+        })
+        .to(tvContent,0.2, {
+          opacity:1,
+          ease: Power1.easeIn
+        }, '-=0.2')
+        .to(tvLogo, 0.3, {
+          opacity: 1,
+          y: '0%',
+          ease: Expo.easeIn
+        }, '-=0.2')
+        .to(tvCallBtn, 0.3, {
+          scale: 1,
+          ease: Expo.easeIn,
+          onComplete: function () {
+            callParal(tvN);
+          }
+        },'-=0.1');
+    }
+
+    function servicesOrganizeDetailFn () {
+      setContent('services-organize-details', null, organizeDetails);
+
+      pageStates.burgerColor = 'dark';
+
+      function organizeDetails () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+
+        $(".m-right-content--text").mCustomScrollbar({
+          theme: 'dark'
+        });
+
+        $(".m-left-slideshow").vegas({
+          slides: [
+            { src: "assets/images/about/1.jpg" },
+            { src: "assets/images/about/2.jpg" },
+            { src: "assets/images/about/3.jpg" },
+            { src: "assets/images/about/4.jpg" }
+          ],
+          transition: 'fade2',
+          preload: true,
+          delay: 7000,
+          animation: 'kenburnsUpLeft'
+        });
+
+        showLogo(logoPages);
+
+      }
+    }
+
+    // Official Fns
+    function servicesOfficialFn () {
+      setContent('services-official', null, runCorporate);
+      lightenBurger();
+      pageStates.burgerColor = 'light';
+
+      function runCorporate () {
+        $('.more-details').click(function () {
+          var wrap = $('.tv-service');
+          TweenMax.to(wrap, 0.3, {
+            opacity: 0,
+            ease: Power1.easeOut,
+            onComplete: function () {
+              router.navigate('service-official/details');
+            }
+          })
+        });
+
+        $('.watch-intro').click(function (e) {
+          e.preventDefault();
+          console.log('click');
+          $(this).magnificPopup({
+            type: 'iframe',
+            iframe: {
+              markup: '<div class="mfp-iframe-scaler">'+
+              '<div class="mfp-close"></div>'+
+              '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+              '<div class="mfp-title">Some caption</div>'+
+              '</div>'
+            }
+          });
+        });
+        setTimeout(function () {
+          enterOfficial();
+          contactsAnimation();
+        }, 2000);
+      }
+    }
+
+    function enterOfficial () {
+
+      var wrap = $('.tv-service');
+      var tvOverlay = $(wrap).find('.global-overlay')[0],
+        tvN = $(wrap).find('.menu-n')[0],
+        tvBgImg = $(wrap).find('.bg-img')[0],
+        tvLogo = $(wrap).find('.menu-logo')[0],
+        tvCallBtn = $(wrap).find('.call-sm')[0],
+        tvContent = $(wrap).find('.service-content')[0];
+
+
+
+      TweenMax.set(tvN, {
+        x: '-200'
+      });
+
+      var tl = new TimelineLite();
+      tl
+        .to(tvOverlay, 0.3, {
+          x: '0%',
+          ease: Power4.easeIn
+        })
+        .to(tvBgImg, 0.4, {
+          backgroundImage: "url('../assets/images/menu-bg.jpg')",
+          opacity: 1,
+          ease: Power3.easeIn
+        },'-=0.2')
+        .to(tvN,0.4, {
+          opacity: 1,
+          x: 0,
+          visibility: "visible",
+          ease: Power1.easeIn
+        })
+        .to(tvContent,0.2, {
+          opacity:1,
+          ease: Power1.easeIn
+        }, '-=0.2')
+        .to(tvLogo, 0.3, {
+          opacity: 1,
+          y: '0%',
+          ease: Expo.easeIn
+        }, '-=0.2')
+        .to(tvCallBtn, 0.3, {
+          scale: 1,
+          ease: Expo.easeIn,
+          onComplete: function () {
+            callParal(tvN);
+          }
+        },'-=0.1');
+    }
+
+    function servicesOfficialDetailFn () {
+      setContent('services-official-details', null, privateDetails);
+
+      pageStates.burgerColor = 'dark';
+
+      function privateDetails () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+
+        $(".m-right-content--text").mCustomScrollbar({
+          theme: 'dark'
+        });
+
+        $(".m-left-slideshow").vegas({
+          slides: [
+            { src: "assets/images/about/1.jpg" },
+            { src: "assets/images/about/2.jpg" },
+            { src: "assets/images/about/3.jpg" },
+            { src: "assets/images/about/4.jpg" }
+          ],
+          transition: 'fade2',
+          preload: true,
+          delay: 7000,
+          animation: 'kenburnsUpLeft'
+        });
+
+        showLogo(logoPages);
+
+      }
+    }
+
+    // Corporate Fns
+    function servicesCorporateFn () {
+      setContent('services-corporate', null, runCorporate);
+
+      lightenBurger();
+      pageStates.burgerColor = 'light';
+
+      function runCorporate () {
+        $('.more-details').click(function () {
+          var wrap = $('.tv-service');
+          TweenMax.to(wrap, 0.3, {
+            opacity: 0,
+            ease: Power1.easeOut,
+            onComplete: function () {
+              router.navigate('service-corporate/details');
+            }
+          })
+        });
+
+        $('.watch-intro').click(function (e) {
+          e.preventDefault();
+          console.log('click');
+          $(this).magnificPopup({
+            type: 'iframe',
+            iframe: {
+              markup: '<div class="mfp-iframe-scaler">'+
+              '<div class="mfp-close"></div>'+
+              '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+              '<div class="mfp-title">Some caption</div>'+
+              '</div>'
+            }
+          });
+        });
+        setTimeout(function () {
+          enterCorporate();
+          contactsAnimation();
+        }, 2000);
+      }
+    }
+
+    function enterCorporate () {
+
+      var wrap = $('.tv-service');
+      var tvOverlay = $(wrap).find('.global-overlay')[0],
+        tvN = $(wrap).find('.menu-n')[0],
+        tvBgImg = $(wrap).find('.bg-img')[0],
+        tvLogo = $(wrap).find('.menu-logo')[0],
+        tvCallBtn = $(wrap).find('.call-sm')[0],
+        tvContent = $(wrap).find('.service-content')[0];
+
+
+
+      TweenMax.set(tvN, {
+        x: '-200'
+      });
+
+      var tl = new TimelineLite();
+      tl
+        .to(tvOverlay, 0.3, {
+          x: '0%',
+          ease: Power4.easeIn
+        })
+        .to(tvBgImg, 0.4, {
+          backgroundImage: "url('../assets/images/menu-bg.jpg')",
+          opacity: 1,
+          ease: Power3.easeIn
+        },'-=0.2')
+        .to(tvN,0.4, {
+          opacity: 1,
+          x: 0,
+          visibility: "visible",
+          ease: Power1.easeIn
+        })
+        .to(tvContent,0.2, {
+          opacity:1,
+          ease: Power1.easeIn
+        }, '-=0.2')
+        .to(tvLogo, 0.3, {
+          opacity: 1,
+          y: '0%',
+          ease: Expo.easeIn
+        }, '-=0.2')
+        .to(tvCallBtn, 0.3, {
+          scale: 1,
+          ease: Expo.easeIn,
+          onComplete: function () {
+            callParal(tvN);
+          }
+        },'-=0.1');
+    }
+
+    function servicesCorporateDetailFn () {
+      setContent('services-corporate-details', null, privateDetails);
+
+      pageStates.burgerColor = 'dark';
+
+      function privateDetails () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+
+        $(".m-right-content--text").mCustomScrollbar({
+          theme: 'dark'
+        });
+
+        $(".m-left-slideshow").vegas({
+          slides: [
+            { src: "assets/images/about/1.jpg" },
+            { src: "assets/images/about/2.jpg" },
+            { src: "assets/images/about/3.jpg" },
+            { src: "assets/images/about/4.jpg" }
+          ],
+          transition: 'fade2',
+          preload: true,
+          delay: 7000,
+          animation: 'kenburnsUpLeft'
+        });
+
+        showLogo(logoPages);
+
+      }
+    }
+
+    // Private Fns
+    function servicesPrivateFn () {
+      setContent('services-private', null, runPrivate);
+      lightenBurger();
+      pageStates.burgerColor = 'light';
+
+      function runPrivate () {
+        $('.more-details').click(function () {
+          var wrap = $('.tv-service');
+          TweenMax.to(wrap, 0.3, {
+            opacity: 0,
+            ease: Power1.easeOut,
+            onComplete: function () {
+              router.navigate('service-private/details');
+            }
+          })
+        });
+
+        $('.watch-intro').click(function (e) {
+          e.preventDefault();
+          console.log('click');
+          $(this).magnificPopup({
+            type: 'iframe',
+            iframe: {
+               markup: '<div class="mfp-iframe-scaler">'+
+                          '<div class="mfp-close"></div>'+
+                          '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                          '<div class="mfp-title">Some caption</div>'+
+                        '</div>'
+            }
+          });
+        });
+        setTimeout(function () {
+          enterPrivate();
+          contactsAnimation();
+        }, 2000);
+      }
+    }
+
+    function enterPrivate () {
+
+      var wrap = $('.tv-service');
+      var tvOverlay = $(wrap).find('.global-overlay')[0],
+        tvN = $(wrap).find('.menu-n')[0],
+        tvBgImg = $(wrap).find('.bg-img')[0],
+        tvLogo = $(wrap).find('.menu-logo')[0],
+        tvCallBtn = $(wrap).find('.call-sm')[0],
+        tvContent = $(wrap).find('.service-content')[0];
+
+
+
+      TweenMax.set(tvN, {
+        x: '-200'
+      });
+
+      var tl = new TimelineLite();
+      tl
+        .to(tvOverlay, 0.3, {
+          x: '0%',
+          ease: Power4.easeIn
+        })
+        .to(tvBgImg, 0.4, {
+          backgroundImage: "url('../assets/images/menu-bg.jpg')",
+          opacity: 1,
+          ease: Power3.easeIn
+        },'-=0.2')
+        .to(tvN,0.4, {
+          opacity: 1,
+          x: 0,
+          visibility: "visible",
+          ease: Power1.easeIn
+        })
+        .to(tvContent,0.2, {
+          opacity:1,
+          ease: Power1.easeIn
+        }, '-=0.2')
+        .to(tvLogo, 0.3, {
+          opacity: 1,
+          y: '0%',
+          ease: Expo.easeIn
+        }, '-=0.2')
+        .to(tvCallBtn, 0.3, {
+          scale: 1,
+          ease: Expo.easeIn,
+          onComplete: function () {
+            callParal(tvN);
+          }
+        },'-=0.1');
+    }
+
+    function servicesPrivateDetailFn () {
+      setContent('services-private-details', null, privateDetails);
+
+      pageStates.burgerColor = 'dark';
+
+      function privateDetails () {
+        hideContacts();
+        var logoPages = $('.logo-hor')[0];
+        $(burger).removeClass('light').addClass('dark');
+
+        $(".m-right-content--text").mCustomScrollbar({
+          theme: 'dark'
+        });
+
+        $(".m-left-slideshow").vegas({
+          slides: [
+            { src: "assets/images/about/1.jpg" },
+            { src: "assets/images/about/2.jpg" },
+            { src: "assets/images/about/3.jpg" },
+            { src: "assets/images/about/4.jpg" }
+          ],
+          transition: 'fade2',
+          preload: true,
+          delay: 7000,
+          animation: 'kenburnsUpLeft'
+        });
+
+        showLogo(logoPages);
+
+      }
+    }
+
+    // TV Fns
     function servicesTvFn () {
       setContent('services-tv', null, runTV);
-
+      lightenBurger();
       pageStates.burgerColor = 'light';
 
 
@@ -556,13 +1099,13 @@
           $(this).magnificPopup({
             type: 'iframe',
             iframe: {
-               markup: '<div class="mfp-iframe-scaler">'+
-                          '<div class="mfp-close"></div>'+
-                          '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
-                          '<div class="mfp-title">Some caption</div>'+
-                        '</div>'
-            }         
-            
+              markup: '<div class="mfp-iframe-scaler">'+
+              '<div class="mfp-close"></div>'+
+              '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+              '<div class="mfp-title">Some caption</div>'+
+              '</div>'
+            }
+
           });
         });
         setTimeout(function () {
@@ -623,15 +1166,16 @@
         },'-=0.1');
     }
 
-
     function servicesTvDetailFn () {
       setContent('services-tv-details', null, tvDetails);
+
+      pageStates.burgerColor = 'dark';
 
       function tvDetails () {
         hideContacts();
         var logoPages = $('.logo-hor')[0];
         $(burger).removeClass('light').addClass('dark');
-        
+
         $(".m-right-content--text").mCustomScrollbar({
           theme: 'dark'
         });
@@ -650,10 +1194,11 @@
         });
 
         showLogo(logoPages);
-        
+
       }
     }
 
+    // Teams Fn
     function teamFn () {
       setContent('team', null, team);
 
@@ -662,11 +1207,13 @@
       function team () {
         hideContacts();
         var logoPages = $('.logo-hor')[0];
-        $(burger).removeClass('light').addClass('dark');
+        lightenBurger();
         showLogo(logoPages);
+
+
       }
     }
-    
+
 
 
 
@@ -694,4 +1241,3 @@
 
 
 
-    

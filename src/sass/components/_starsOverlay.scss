@@ -88,6 +88,38 @@
   }
 }
 
+.global-overlay-team {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+  opacity: 1;
+  z-index:5;
+}
+
+.overlay-team {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  right: -50%;
+  background: #999999;
+  width: 200%;
+  height: 100%;
+  @include transition(all 0.5s cubic-bezier(0.7, 0, 0.3, 1));
+  border-right: 1px solid #15171e;
+
+  &.skew-part {
+    @include transform(skew(25deg, 0deg));
+  }
+
+  &.skew-part-2 {
+    @include transform(skew(-25deg, 0deg));
+  }
+}
+
+
 .overlay {
   position: fixed;
   overflow: hidden;
